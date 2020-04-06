@@ -148,11 +148,14 @@ class SecondViewController: UIViewController {
 }
 
 class ThirdViewController: UIViewController {
-    
+
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
         
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
+        
+    
         let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
         imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         
@@ -180,6 +183,21 @@ class ThirdViewController: UIViewController {
         self.view = view
         
     }
+    
+    var timeLabel: UILabel
+    var timer:Timer?
+    var timeLeft = 480
+    
+    @objc func onTimerFires() {
+             
+             timeLeft -= 1
+             timeLabel.text = "\(timeLeft) seconds left"
+
+             if timeLeft <= 0 {
+                timer?.invalidate()
+                 timer = nil
+             }
+         }
 }
 
 // Present the view controller in the Live View window
