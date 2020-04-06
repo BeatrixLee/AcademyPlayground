@@ -15,7 +15,7 @@ class FirstViewController : UIViewController {
         let vc = SecondViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
         
-
+        
     }
     
     @IBAction func touchedButtonGallery() {
@@ -63,7 +63,7 @@ class FirstViewController : UIViewController {
         theCult.font = font
         
         
-       
+        
         
         
         view.addSubview(imgBackground)
@@ -91,8 +91,8 @@ class SecondViewController: UIViewController {
     }
     
     @IBAction func touchedButtonHard() {
-           print("tocou botão dificil")
-       }
+        print("tocou botão dificil")
+    }
     
     override func loadView() {
         let view = UIView()
@@ -100,10 +100,10 @@ class SecondViewController: UIViewController {
         
         
         let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
-               imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         
         let imgView = UIImageView(frame: CGRect(x: 118, y: 251, width: 1193, height: 415))
-               imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
+        imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
         
         let dificuldade = UILabel()
         dificuldade.frame = CGRect(x: 390, y: 320, width: 928, height: 107)
@@ -114,12 +114,12 @@ class SecondViewController: UIViewController {
         dificuldade.font = font
         
         let buttonEasy = UIButton()
-               buttonEasy.frame = CGRect(x: 179, y: 456, width: 340, height: 117)
-               
-               let imageEasy = UIImage(named: "Facil")!
-               buttonEasy.setImage(imageEasy, for: .normal)
-               
-               buttonEasy.addTarget(self, action: #selector(SecondViewController.touchedButtonEasy), for: .touchUpInside)
+        buttonEasy.frame = CGRect(x: 179, y: 456, width: 340, height: 117)
+        
+        let imageEasy = UIImage(named: "Facil")!
+        buttonEasy.setImage(imageEasy, for: .normal)
+        
+        buttonEasy.addTarget(self, action: #selector(SecondViewController.touchedButtonEasy), for: .touchUpInside)
         
         let buttonMedium = UIButton()
         buttonMedium.frame = CGRect(x: 552, y: 454, width: 340, height: 117)
@@ -148,14 +148,18 @@ class SecondViewController: UIViewController {
 }
 
 class ThirdViewController: UIViewController {
-
+    
+    var timeLabel: UILabel = UILabel()
+    var timer:Timer?
+    var timeLeft = 3
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
         
-    
+        
         let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
         imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         
@@ -163,19 +167,19 @@ class ThirdViewController: UIViewController {
         imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
         
         let start = UILabel()
-             start.frame = CGRect(x: 350, y: 300, width: 928, height: 300)
-             start.text = "Os jogos começaram!\n Descubra a cultura "
-             start.textColor = .black
-             
+        start.frame = CGRect(x: 350, y: 300, width: 928, height: 300)
+        start.text = "Os jogos começaram!\n Descubra a cultura "
+        start.textColor = .black
+        
         start.numberOfLines = 0
         let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 70)! ]
         let myString = NSMutableAttributedString(string: "Os jogos começaram!\n Descubra a cultura", attributes: myAttribute)
         
         let myRange = NSRange(location: 19, length: 20)
         myString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.purple, range: myRange)
-       
+        
         start.attributedText = myString
-    
+        
         
         view.addSubview(imgBackground)
         view.addSubview(imgView)
@@ -184,22 +188,30 @@ class ThirdViewController: UIViewController {
         
     }
     
-    var timeLabel: UILabel
-    var timer:Timer?
-    var timeLeft = 480
-    
     @objc func onTimerFires() {
-             
-             timeLeft -= 1
-             timeLabel.text = "\(timeLeft) seconds left"
-
-             if timeLeft <= 0 {
-                timer?.invalidate()
-                 timer = nil
-             }
-         }
+        
+        timeLeft -= 1
+        timeLabel.text = "\(timeLeft) seconds left"
+        
+        if timeLeft <= 0 {
+            timer?.invalidate()
+            timer = nil
+            
+            DispatchQueue.main.async {
+                let vc = FourthViewController(screenType: .mac, isPortrait: true)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
 }
 
+class FourthViewController: UIViewController {
+    
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+    }
+}
 // Present the view controller in the Live View window
 
 
