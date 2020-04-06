@@ -82,6 +82,8 @@ class SecondViewController: UIViewController {
     
     @IBAction func touchedButtonEasy() {
         print("tocou botão facil")
+        let vc = ThirdViewController(screenType: .mac, isPortrait: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func touchedButtonMedium() {
@@ -144,6 +146,42 @@ class SecondViewController: UIViewController {
         self.view = view
     }
 }
+
+class ThirdViewController: UIViewController {
+    
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+        
+        let imgView = UIImageView(frame: CGRect(x: 118, y: 251, width: 1193, height: 415))
+        imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
+        
+        let start = UILabel()
+             start.frame = CGRect(x: 350, y: 300, width: 928, height: 300)
+             start.text = "Os jogos começaram!\n Descubra a cultura "
+             start.textColor = .black
+             
+        start.numberOfLines = 0
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 70)! ]
+        let myString = NSMutableAttributedString(string: "Os jogos começaram!\n Descubra a cultura", attributes: myAttribute)
+        
+        let myRange = NSRange(location: 19, length: 20)
+        myString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.purple, range: myRange)
+       
+        start.attributedText = myString
+    
+        
+        view.addSubview(imgBackground)
+        view.addSubview(imgView)
+        view.addSubview(start)
+        self.view = view
+        
+    }
+}
+
 // Present the view controller in the Live View window
 
 
