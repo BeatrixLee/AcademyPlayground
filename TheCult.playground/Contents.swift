@@ -207,10 +207,71 @@ class ThirdViewController: UIViewController {
 
 class FourthViewController: UIViewController {
     
+    var timeLabel: UILabel = UILabel()
+    var timer:Timer?
+    var timeLeft = 120
+    let timerLabel: UILabel = UILabel()
+    let fontBold = UIFont(name: "Quicksand-Bold", size: 80)
+    let fontSemiBold = UIFont(name: "Quicksand-SemiBold", size: 80)
+    let buttonAnswer = UIButton()
+    let answerLabel = UILabel()
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
+        
+        timerLabel.frame = CGRect(x: 675, y: 316, width: 90, height: 61)
+        timerLabel.textColor = .white
+        timerLabel.text = "TIMER"
+        timerLabel.font = fontSemiBold
+        
+        answerLabel.frame = CGRect(x: 568, y: 400, width: 306, height: 158)
+        answerLabel.textColor = .white
+        answerLabel.text = "Já sabe a resposta?"
+        answerLabel.font = fontSemiBold
+        
+        
+        timeLabel.frame = CGRect(x: 650, y: 350, width: 222, height: 61)
+        timeLabel.textColor = .white
+        timeLabel.font = fontBold
+       
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
+
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+        imgBackground.image = UIImage(imageLiteralResourceName: "BGCLEAN")
+        
+               buttonAnswer.frame = CGRect(x: 570, y: 498, width: 300, height: 180)
+               
+               let imageAnswer = UIImage(named: "botaoResponder")!
+               buttonAnswer.setImage(imageAnswer, for: .normal)
+               
+               buttonAnswer.addTarget(self, action: #selector(FourthViewController.touchedButtonAnswer), for: .touchUpInside)
+        
+        
+        view.addSubview(imgBackground)
+        view.addSubview(timerLabel)
+        view.addSubview(timeLabel)
+        view.addSubview(buttonAnswer)
+        view.addSubview(answerLabel)
+        self.view = view
     }
+    
+    @IBAction func touchedButtonAnswer() {
+           print("tocou botão responder")
+       }
+    
+    @objc func onTimerFires() {
+         
+         timeLeft -= 1
+         timeLabel.text = "\(timeLeft)s"
+         
+         if timeLeft <= 0 {
+             timer?.invalidate()
+             timer = nil
+             
+         }
+     }
 }
 // Present the view controller in the Live View window
 
