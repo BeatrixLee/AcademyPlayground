@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/beatrixlee/Desktop/projetos/TheCult.playground#CharacterRangeLen=17581&amp;CharacterRangeLoc=0&amp;EndingColumnNumber=56&amp;EndingLineNumber=502&amp;StartingColumnNumber=0&amp;StartingLineNumber=0&amp;Timestamp=608160409.88731"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

@@ -3,16 +3,16 @@ import UIKit
 
 public class Card {
     
-    public let name: String
-    public let imageCulture: UIImage
     public let imageCard: UIImage
+    public let labelCard: UILabel
     
-    public init (name: String, imageCulture: UIImage, imageCard: UIImage) {
+    public init (imageCard: UIImage, labelCard: UILabel) {
         
-        self.name = name
         self.imageCard = imageCard
-        self.imageCulture = imageCulture
+        self.labelCard = labelCard
         
     }
+    
+    
 
 }
