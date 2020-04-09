@@ -4,7 +4,10 @@ import UIKit
 import PlaygroundSupport
 
 
-let cfURL = Bundle.main.url(forResource: "Quicksand-Bold", withExtension: "ttf")! as CFURL
+var cfURL = Bundle.main.url(forResource: "Quicksand-Bold", withExtension: "ttf")! as CFURL
+CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
+
+  cfURL = Bundle.main.url(forResource: "Quicksand-Medium", withExtension: "ttf")! as CFURL
 CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
 
 
@@ -150,6 +153,7 @@ class SecondViewController: UIViewController {
 class ThirdViewController: UIViewController {
     
     var timeLabel: UILabel = UILabel()
+    let start = UILabel()
     var timer:Timer?
     var timeLeft = 3
     
@@ -166,17 +170,27 @@ class ThirdViewController: UIViewController {
         let imgView = UIImageView(frame: CGRect(x: 118, y: 251, width: 1193, height: 415))
         imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
         
-        let start = UILabel()
-        start.frame = CGRect(x: 350, y: 300, width: 928, height: 300)
-        start.text = "Os jogos começaram!\n Descubra a cultura "
+        
+        start.frame = CGRect(x: 250, y: 300, width: 928, height: 300)
+        start.text = "Os jogos começaram!\n Descubra a cultura"
         start.textColor = .black
-        
         start.numberOfLines = 0
-        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 70)! ]
-        let myString = NSMutableAttributedString(string: "Os jogos começaram!\n Descubra a cultura", attributes: myAttribute)
+        start.textAlignment = .center
         
-        let myRange = NSRange(location: 19, length: 20)
-        myString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.purple, range: myRange)
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 70)! ]
+        let myString = NSMutableAttributedString(string: "Os jogos começaram!\n", attributes: myAttribute)
+        
+
+        let bigFont = UIFont(name: "Quicksand-Bold", size: 90)
+        let bigAtt = [NSAttributedString.Key.font : bigFont, NSAttributedString.Key.foregroundColor : UIColor.purple]
+
+        myString.append(NSAttributedString(string: "Descubra a cultura", attributes: bigAtt as [NSAttributedString.Key : Any]))
+        
+        
+        
+    
+        
+
         
         start.attributedText = myString
         
@@ -212,7 +226,7 @@ class FourthViewController: UIViewController {
     var timeLeft = 120
     let timerLabel: UILabel = UILabel()
     let fontBold = UIFont(name: "Quicksand-Bold", size: 80)
-    let fontSemiBold = UIFont(name: "Quicksand-SemiBold", size: 80)
+    let fontMedium = UIFont(name: "Quicksand-Medium", size: 32)
     let buttonAnswer = UIButton()
     let answerLabel = UILabel()
     
@@ -220,20 +234,24 @@ class FourthViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         
-        timerLabel.frame = CGRect(x: 675, y: 316, width: 90, height: 61)
+        timerLabel.frame = CGRect(x: 675, y: 290, width: 100, height: 61)
         timerLabel.textColor = .white
         timerLabel.text = "TIMER"
-        timerLabel.font = fontSemiBold
+        timerLabel.font = fontMedium
         
-        answerLabel.frame = CGRect(x: 568, y: 400, width: 306, height: 158)
+        
+        answerLabel.frame = CGRect(x: 572, y: 380, width: 306, height: 158)
         answerLabel.textColor = .white
         answerLabel.text = "Já sabe a resposta?"
-        answerLabel.font = fontSemiBold
+        answerLabel.font = fontMedium
         
         
-        timeLabel.frame = CGRect(x: 650, y: 350, width: 222, height: 61)
+        timeLabel.frame = CGRect(x: 610, y: 355, width: 222, height: 61)
         timeLabel.textColor = .white
         timeLabel.font = fontBold
+        timeLabel.textAlignment = .center
+       
+                    
        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
 
