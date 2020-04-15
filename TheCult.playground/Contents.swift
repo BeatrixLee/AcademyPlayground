@@ -13,17 +13,12 @@ CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
 
 class FirstViewController : UIViewController {
     
-    @IBAction func touchedButtonPlay() {
-        print("tocou botão jogar")
-        let vc = SecondViewController(screenType: .mac, isPortrait: true)
-        navigationController?.pushViewController(vc, animated: true)
-        
-        
-    }
     
-    @IBAction func touchedButtonGallery() {
-        print("tocou botão galeria")
-    }
+    let buttonPlay = UIButton()
+    let buttonGallery = UIButton()
+    let theCult = UILabel()
+    
+    
     
     override func loadView() {
         let view = UIView()
@@ -38,7 +33,6 @@ class FirstViewController : UIViewController {
         
         
         
-        let buttonPlay = UIButton()
         buttonPlay.frame = CGRect(x: 312, y: 380, width: 780, height: 140)
         
         let imagePlay = UIImage(named: "Play")!
@@ -48,8 +42,6 @@ class FirstViewController : UIViewController {
         buttonPlay.addTarget(self, action: #selector(FirstViewController.touchedButtonPlay), for: .touchUpInside)
         
         
-        
-        let buttonGallery = UIButton()
         buttonGallery.frame = CGRect(x: 334, y: 510, width: 759, height: 140)
         let imageGallery = UIImage(named: "gallery")!
         buttonGallery.setImage(imageGallery, for: .normal)
@@ -57,16 +49,12 @@ class FirstViewController : UIViewController {
         
         buttonGallery.addTarget(self, action: #selector(FirstViewController.touchedButtonGallery), for: .touchUpInside)
         
-        let theCult = UILabel()
         theCult.frame = CGRect(x: 520, y: 220, width: 650, height: 75)
         theCult.text = "The Cult"
         theCult.textColor = .black
         
         let font = UIFont(name: "Quicksand-Bold", size: 100)
         theCult.font = font
-        
-        
-        
         
         
         view.addSubview(imgBackground)
@@ -77,11 +65,75 @@ class FirstViewController : UIViewController {
         
         self.view = view
         
+    }
+    
+    @IBAction func touchedButtonPlay() {
+        print("tocou botão jogar")
+        let vc = SecondViewController(screenType: .mac, isPortrait: true)
+        navigationController?.pushViewController(vc, animated: true)
         
+        
+    }
+    
+    @IBAction func touchedButtonGallery() {
+        print("tocou botão galeria")
     }
 }
 
 class SecondViewController: UIViewController {
+    
+    let dificuldade = UILabel()
+    let buttonEasy = UIButton()
+    let buttonMedium = UIButton()
+    let buttonHard = UIButton()
+
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+        
+        let imgView = UIImageView(frame: CGRect(x: 118, y: 251, width: 1193, height: 415))
+        imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
+        
+        dificuldade.frame = CGRect(x: 390, y: 320, width: 928, height: 107)
+        dificuldade.text = "Defina a dificuldade"
+        dificuldade.textColor = .black
+        
+        let font = UIFont(name: "Quicksand-Bold", size: 70)
+        dificuldade.font = font
+        
+        buttonEasy.frame = CGRect(x: 179, y: 456, width: 340, height: 117)
+        
+        let imageEasy = UIImage(named: "Facil")!
+        buttonEasy.setImage(imageEasy, for: .normal)
+        
+        buttonEasy.addTarget(self, action: #selector(SecondViewController.touchedButtonEasy), for: .touchUpInside)
+        
+        buttonMedium.frame = CGRect(x: 552, y: 454, width: 340, height: 117)
+        
+        let imageMedium = UIImage(named: "Medio")!
+        buttonMedium.setImage(imageMedium, for: .normal)
+        
+        buttonMedium.addTarget(self, action: #selector(SecondViewController.touchedButtonMedium), for: .touchUpInside)
+        
+        buttonHard.frame = CGRect(x: 923, y: 454, width: 340, height: 117)
+        
+        let imageHard = UIImage(named: "Dificil")!
+        buttonHard.setImage(imageHard, for: .normal)
+        
+        buttonHard.addTarget(self, action: #selector(SecondViewController.touchedButtonHard), for: .touchUpInside)
+        
+        view.addSubview(imgBackground)
+        view.addSubview(imgView)
+        view.addSubview(dificuldade)
+        view.addSubview(buttonEasy)
+        view.addSubview(buttonMedium)
+        view.addSubview(buttonHard)
+        self.view = view
+    }
     
     @IBAction func touchedButtonEasy() {
         print("tocou botão facil")
@@ -102,58 +154,6 @@ class SecondViewController: UIViewController {
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 30
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        
-        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
-        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
-        
-        let imgView = UIImageView(frame: CGRect(x: 118, y: 251, width: 1193, height: 415))
-        imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
-        
-        let dificuldade = UILabel()
-        dificuldade.frame = CGRect(x: 390, y: 320, width: 928, height: 107)
-        dificuldade.text = "Defina a dificuldade"
-        dificuldade.textColor = .black
-        
-        let font = UIFont(name: "Quicksand-Bold", size: 70)
-        dificuldade.font = font
-        
-        let buttonEasy = UIButton()
-        buttonEasy.frame = CGRect(x: 179, y: 456, width: 340, height: 117)
-        
-        let imageEasy = UIImage(named: "Facil")!
-        buttonEasy.setImage(imageEasy, for: .normal)
-        
-        buttonEasy.addTarget(self, action: #selector(SecondViewController.touchedButtonEasy), for: .touchUpInside)
-        
-        let buttonMedium = UIButton()
-        buttonMedium.frame = CGRect(x: 552, y: 454, width: 340, height: 117)
-        
-        let imageMedium = UIImage(named: "Medio")!
-        buttonMedium.setImage(imageMedium, for: .normal)
-        
-        buttonMedium.addTarget(self, action: #selector(SecondViewController.touchedButtonMedium), for: .touchUpInside)
-        
-        let buttonHard = UIButton()
-        buttonHard.frame = CGRect(x: 923, y: 454, width: 340, height: 117)
-        
-        let imageHard = UIImage(named: "Dificil")!
-        buttonHard.setImage(imageHard, for: .normal)
-        
-        buttonHard.addTarget(self, action: #selector(SecondViewController.touchedButtonHard), for: .touchUpInside)
-        
-        view.addSubview(imgBackground)
-        view.addSubview(imgView)
-        view.addSubview(dificuldade)
-        view.addSubview(buttonEasy)
-        view.addSubview(buttonMedium)
-        view.addSubview(buttonHard)
-        self.view = view
     }
 }
 
@@ -193,11 +193,6 @@ class ThirdViewController: UIViewController {
         let bigAtt = [NSAttributedString.Key.font : bigFont, NSAttributedString.Key.foregroundColor : UIColor.purple]
         
         myString.append(NSAttributedString(string: "Descubra a cultura", attributes: bigAtt as [NSAttributedString.Key : Any]))
-        
-        
-        
-        
-        
         
         
         start.attributedText = myString
@@ -297,7 +292,7 @@ class FourthViewController: UIViewController {
         
         buttonTip2.setTitle("Tip2", for: .normal)
         buttonTip2.titleLabel?.isHidden = true
-
+        
         let imageButton2 = UIImage(named: "ButtonTip2")!
         buttonTip2.setImage(imageButton2, for: .normal)
         
@@ -306,7 +301,7 @@ class FourthViewController: UIViewController {
         buttonTip3.frame = CGRect(x: 1126, y: 586, width: 314, height: 314)
         buttonTip3.setTitle("Tip3", for: .normal)
         buttonTip3.titleLabel?.isHidden = true
-
+        
         
         let imageButton3 = UIImage(named: "ButtonTip3")!
         buttonTip3.setImage(imageButton3, for: .normal)
@@ -363,11 +358,11 @@ class FourthViewController: UIViewController {
     }
     
     @IBAction func touchedTip(_ sender: UIButton) {
-            let vc = SixthViewController(screenType: .mac, isPortrait: true)
+        let vc = SixthViewController(screenType: .mac, isPortrait: true)
         vc.button = sender.titleLabel?.text
         navigationController?.pushViewController(vc, animated: true)
-        }
-        
+    }
+    
     @objc func onTimerFires() {
         
         timeLeft! -= 1
@@ -411,24 +406,34 @@ class FifthViewController: UIViewController {
         cultureLabel.textAlignment = .center
         
         button1.frame = CGRect(x: 176.8, y: 341, width: 225, height: 320)
-        
         let imageButton1 = UIImage(named: "Japão")!
         button1.setImage(imageButton1, for: .normal)
-        
+        button1.setTitle("Japão", for: .normal)
+        button1.titleLabel?.isHidden = true
+        button1.addTarget(self, action: #selector(FifthViewController.wrongbutton), for: .touchUpInside)
+
         button2.frame = CGRect(x: 456.3, y: 341, width: 225, height: 320)
-        
         let imageButton2 = UIImage(named: "Espanha")!
         button2.setImage(imageButton2, for: .normal)
+        button2.setTitle("Espanha", for: .normal)
+        button2.titleLabel?.isHidden = true
+        button2.addTarget(self, action: #selector(FifthViewController.wrongbutton), for: .touchUpInside)
+
         
         button3.frame = CGRect(x: 735, y: 341, width: 225, height: 320)
-        
         let imageButton3 = UIImage(named: "China")!
         button3.setImage(imageButton3, for: .normal)
+        button3.setTitle("China", for: .normal)
+        button3.titleLabel?.isHidden = true
+        button3.addTarget(self, action: #selector(FifthViewController.rightbutton), for: .touchUpInside)
         
         button4.frame = CGRect(x: 1015.63, y: 341, width: 225, height: 320)
-        
         let imageButton4 = UIImage(named: "Portugal")!
         button4.setImage(imageButton4, for: .normal)
+        button4.setTitle("Portugal", for: .normal)
+        button4.titleLabel?.isHidden = true
+        button4.addTarget(self, action: #selector(FifthViewController.wrongbutton), for: .touchUpInside)
+
         
         view.addSubview(imgBackground)
         view.addSubview(imgView)
@@ -441,6 +446,20 @@ class FifthViewController: UIViewController {
         
         
     }
+    
+    @IBAction func rightbutton() {
+        print("tocou botão china")
+        let vc = SeventhViewController(screenType: .mac, isPortrait: true)
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func wrongbutton() {
+          print("tocou botão errado")
+          let vc = NinthViewController(screenType: .mac, isPortrait: true)
+          navigationController?.pushViewController(vc, animated: true)
+          
+      }
     
 }
 
@@ -460,10 +479,10 @@ class SixthViewController: UIViewController {
         imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         imgBackground.isUserInteractionEnabled = true
         let tapOut = UITapGestureRecognizer(target: self, action: #selector(back))
-            
-            imgBackground.addGestureRecognizer(tapOut)
-
-
+        
+        imgBackground.addGestureRecognizer(tapOut)
+        
+        
         image = UIImageView(frame: CGRect(x: 298, y: 51, width: 853, height: 791))
         
         
@@ -473,7 +492,7 @@ class SixthViewController: UIViewController {
         view.addSubview(image!)
         
         self.view = view
-    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -489,9 +508,202 @@ class SixthViewController: UIViewController {
     }
 }
 
+class SeventhViewController: UIViewController {
+    
+    var timer:Timer?
+    var timeLeft = 3
+    var timeLabel: UILabel = UILabel()
+    var congratulation = UIImage()
+    
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+        
+        let imgView = UIImageView(frame: CGRect(x: 125, y: 172, width: 1181, height: 547))
+        imgView.image = UIImage(imageLiteralResourceName: "RectangleAnswer")
+        
+        let firework = UIImageView(frame: CGRect(x: 91, y: 136, width: 1231, height: 207))
+        firework.image = UIImage(imageLiteralResourceName: "Component 1")
+        
+        let winner = UIImageView(frame: CGRect(x: 567, y: 399, width: 270, height: 270))
+        winner.image = UIImage(imageLiteralResourceName: "Winner")
+        
+        let congratulation = UIImageView(frame: CGRect(x: 315, y: 228, width: 800, height: 170))
+               congratulation.image = UIImage(imageLiteralResourceName: "congratulation")
+               
+        
+        view.addSubview(imgBackground)
+        view.addSubview(imgView)
+        view.addSubview(firework)
+        view.addSubview(winner)
+        view.addSubview(congratulation)
+        self.view = view
+        
+    }
+    
+    @objc func onTimerFires() {
+        
+        timeLeft -= 1
+        timeLabel.text = "\(timeLeft) seconds left"
+        
+        if timeLeft <= 0 {
+            timer?.invalidate()
+            timer = nil
+            
+            DispatchQueue.main.async {
+                let vc = EigthViewController(screenType: .mac, isPortrait: true)
+                self.navigationController?.pushViewController(vc, animated: true)
 
+            }
+        }
+    }
+}
 
+class EigthViewController: UIViewController {
+    
+    var congratulation = UIImage()
+    let buttonEasy = UIButton()
+    let buttonMedium = UIButton()
+    let buttonHard = UIButton()
+    let buttonAnotherCulture = UIButton()
+    
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+        imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+        
+        let imgView = UIImageView(frame: CGRect(x: 125, y: 172, width: 1181, height: 547))
+        imgView.image = UIImage(imageLiteralResourceName: "RectangleAnswer")
+        
+        let firework = UIImageView(frame: CGRect(x: 91, y: 136, width: 1231, height: 207))
+        firework.image = UIImage(imageLiteralResourceName: "Component 1")
+        
+        let congratulation = UIImageView(frame: CGRect(x: 315, y: 228, width: 800, height: 170))
+        congratulation.image = UIImage(imageLiteralResourceName: "congratulation")
+        
+        buttonMedium.frame = CGRect(x: 779, y: 480, width: 440, height: 145)
+               
+               let imageMedium = UIImage(named: "medium2")!
+               buttonMedium.setImage(imageMedium, for: .normal)
+               
+               buttonMedium.addTarget(self, action: #selector(EigthViewController.touchedButtonMedium), for: .touchUpInside)
+        
+        buttonAnotherCulture.frame = CGRect(x: 258, y: 480, width: 440, height: 145)
+               
+               let imageAnotherCulture = UIImage(named: "anotherCulture")!
+               buttonAnotherCulture.setImage(imageAnotherCulture, for: .normal)
+               
+               buttonAnotherCulture.addTarget(self, action: #selector(EigthViewController.touchedButtonAnotherCulture), for: .touchUpInside)
+        
+        
+        
+        self.view = view
+        view.addSubview(imgBackground)
+        view.addSubview(imgView)
+        view.addSubview(firework)
+        view.addSubview(congratulation)
+        view.addSubview(buttonMedium)
+        view.addSubview(buttonAnotherCulture)
+    }
+    
+    @IBAction func touchedButtonMedium() {
+        print("tocou botão medio")
+        let vc = ThirdViewController(screenType: .mac, isPortrait: true)
+        vc.difficulty = 60
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func touchedButtonAnotherCulture() {
+        print("tocou botão medio")
+        let vc = ThirdViewController(screenType: .mac, isPortrait: true)
+        vc.difficulty = 120
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
 
+class NinthViewController: UIViewController {
+    
+    let failed = UILabel()
+    let buttonTry = UIButton()
+    let buttonAnotherCulture2 = UIButton()
+    
+    override func loadView() {
+    let view = UIView()
+    view.backgroundColor = .white
+        
+        let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
+               imgBackground.image = UIImage(imageLiteralResourceName: "Background")
+               
+        let imgView = UIImageView(frame: CGRect(x: 125, y: 172, width: 1181, height: 547))
+               imgView.image = UIImage(imageLiteralResourceName: "RectangleAnswer")
+
+        failed.frame = CGRect(x: 250, y: 210, width: 940, height: 230)
+        failed.text = "Tudo bem,\n ninguém nasce sabendo tudo!"
+        failed.textColor = .black
+        failed.numberOfLines = 0
+        failed.textAlignment = .center
+        
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.8
+        paragraphStyle.alignment = .center
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 100)!]
+        let myString = NSMutableAttributedString(string: "Tudo bem,\n", attributes: myAttribute)
+       
+        
+        let smallFont = UIFont(name: "Quicksand-Bold", size: 65)
+        let bigAtt = [NSAttributedString.Key.font : smallFont, NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        
+        myString.append(NSAttributedString(string: "ninguém nasce sabendo tudo!", attributes: bigAtt as [NSAttributedString.Key : Any]))
+        myString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myString.length))
+        
+        
+        failed.attributedText = myString
+        
+        let goal = UIImageView(frame: CGRect(x: 600, y: 420, width: 226, height: 226))
+                      goal.image = UIImage(imageLiteralResourceName: "Goal")
+        
+        buttonAnotherCulture2.frame = CGRect(x: 884, y: 482, width: 346, height: 145)
+                     
+                     let imageAnotherCulture2 = UIImage(named: "anotherCulture2")!
+                     buttonAnotherCulture2.setImage(imageAnotherCulture2, for: .normal)
+                     
+                     buttonAnotherCulture2.addTarget(self, action: #selector(NinthViewController.touchedButtonAnotherCulture), for: .touchUpInside)
+        
+        buttonTry.frame = CGRect(x: 195, y: 482, width: 346, height: 145)
+        
+        let imageTry = UIImage(named: "try")!
+        buttonTry.setImage(imageTry, for: .normal)
+        
+        buttonTry.addTarget(self, action: #selector(NinthViewController.touchedButtonAnotherCulture), for: .touchUpInside)
+               
+
+        
+        self.view = view
+        view.addSubview(imgBackground)
+        view.addSubview(imgView)
+        view.addSubview(failed)
+        view.addSubview(goal)
+        view.addSubview(buttonAnotherCulture2)
+        view.addSubview(buttonTry)
+        
+    }
+    
+    @IBAction func touchedButtonAnotherCulture() {
+           print("tocou botão medio")
+           let vc = ThirdViewController(screenType: .mac, isPortrait: true)
+           vc.difficulty = 120
+           navigationController?.pushViewController(vc, animated: true)
+       }
+}
 // Present the view controller in the Live View window
 
 
