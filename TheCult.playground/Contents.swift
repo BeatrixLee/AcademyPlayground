@@ -16,6 +16,7 @@ class FirstViewController : UIViewController {
     
     let buttonPlay = UIButton()
     let buttonGallery = UIButton()
+    var monocle = UIImageView()
     
     
     override func loadView() {
@@ -23,6 +24,8 @@ class FirstViewController : UIViewController {
         )
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
+        
+    
         let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
         imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         
@@ -33,12 +36,15 @@ class FirstViewController : UIViewController {
         let imgView = UIImageView(frame: CGRect(x: 118, y: 126, width: 1204, height: 660))
         imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
         
-        var monocle = UIImageView(frame: CGRect(x: 790, y: 0, width: 52.54, height: 43.94))
+        var monocle = UIImageView(frame: CGRect(x: 790, y: 200, width: 52.54, height: 43.94))
         monocle.image = UIImage(imageLiteralResourceName: "monocle")
         
-        UIView.animate(withDuration: 2.0, animations: { () -> Void in
-           monocle.center = view.center
-           })
+        
+        UIView.animate(withDuration: 2.0, delay: 0.3, options: .beginFromCurrentState, animations: { () -> Void in
+                  monocle.center = view.center
+                  
+              })
+        
         
         buttonPlay.frame = CGRect(x: 312, y: 380, width: 780, height: 140)
         
@@ -67,13 +73,13 @@ class FirstViewController : UIViewController {
         self.view = view
         
     }
-    
+      
+        
     @IBAction func touchedButtonPlay() {
         print("tocou botão jogar")
         let vc = SecondViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
-        
-        
+
     }
     
     @IBAction func touchedButtonGallery() {
@@ -83,6 +89,7 @@ class FirstViewController : UIViewController {
     }
     
 }
+    
 
 class SecondViewController: UIViewController {
     
@@ -381,6 +388,8 @@ class FourthViewController: UIViewController {
             
         }
     }
+    
+    
 }
 
 
@@ -510,6 +519,7 @@ class SixthViewController: UIViewController {
     @IBAction func back(){
         navigationController?.popViewController(animated: true)
     }
+    
 }
 
 class SeventhViewController: UIViewController {
@@ -626,8 +636,7 @@ class EigthViewController: UIViewController {
     
     @IBAction func touchedButtonAnotherCulture() {
         print("tocou botão medio")
-        let vc = ThirdViewController(screenType: .mac, isPortrait: true)
-        vc.difficulty = 120
+        let vc = FirstViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -709,10 +718,10 @@ class NinthViewController: UIViewController {
     }
 }
 
-class TenthViewController: UIViewController {
+class TenthViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let cultureGallery = UILabel()
-//    var myCollectionView: UICollectionView?
+    var myCollectionView: UICollectionView?
     
     override func loadView() {
         let view = UIView()
@@ -745,43 +754,108 @@ class TenthViewController: UIViewController {
         
         cultureGallery.attributedText = myString
         
-//        let Layout = UICollectionViewFlowLayout()
-//        Layout.sectionInset = UIEdgeInsets(top: 32, left: 20, bottom: 20, right: 20)
-//        Layout.itemSize = CGSize(width: 60, height: 65)
-//
-//        myCollectionView = UICollectionView(frame: CGRect(x: 87, y: 305, width: 1286, height: 595), collectionViewLayout: Layout)
+        let Layout = UICollectionViewFlowLayout()
+        Layout.sectionInset = UIEdgeInsets(top: 32, left: 20, bottom: 20, right: 20)
+        Layout.itemSize = CGSize(width: 226.43, height: 320)
+        Layout.minimumLineSpacing = 30
+        Layout.minimumInteritemSpacing = 7
         
-//        myCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
-//        myCollectionView?.backgroundColor = UIColor.white
-//        myCollectionView?.dataSource = self
-//
+        myCollectionView = UICollectionView(frame: CGRect(x: 120, y: 305, width: 1200, height: 595), collectionViewLayout: Layout)
+        
+        myCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
+        myCollectionView?.backgroundColor = UIColor.white
+        myCollectionView?.dataSource = self
+        myCollectionView?.delegate = self
+        
         self.view = view
         view.addSubview(firework)
         view.addSubview(cultureGallery)
-//        view.addSubview(myCollectionView!)
+        view.addSubview(myCollectionView!)
         
     }
     
-//    var cards = [Card(imageCard: "China"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio")]
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 0
-//    }
-//
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        print("cellforItem")
-//        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
-//
-//        myCell.backgroundView = UIImageView(image: UIImage(named: cards[indexPath.row].imageCard))
-//
-//        return myCell
-//    }
+    var cards = [Card(imageCard: "China"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio")]
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cards.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath)
+        
+        myCell.backgroundView = UIImageView(image: UIImage(named: cards[indexPath.row].imageCard))
+        
+        return myCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == 0 {
+        let vc = EleventhViewController(screenType: .mac, isPortrait: true)
+        navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
+
+class EleventhViewController: UIViewController {
+    
+    let cultureGallery = UILabel()
+    let labelCulture = UILabel()
+
+    override func loadView() {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let firework = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 285))
+        firework.image = UIImage(imageLiteralResourceName: "Component 2")
+        
+        let china = UIImageView(frame: CGRect(x: 199, y: 373, width: 279.5, height: 395))
+        china.image = UIImage(imageLiteralResourceName: "China")
+        
+        labelCulture.frame = CGRect(x: 577, y: 370, width: 708, height: 410)
+        labelCulture.text = "A China é um país diferente. A sua força e importância já é expressa em seu nome chinês: Zhong Guo – país central. É um país com 4.000 anos de história, com uma das maiores e mais antigas civilizações do mundo. Com grande simbolismo atrelado à sua cultura, a China se destaca como um país com uma pluralidade de idiomas, crenças, cerimônias, sendo esses pontos crucias na construção identitária dessa civilização."
+        labelCulture.numberOfLines = 0
+        labelCulture.textColor = .black
+        let font = UIFont(name: "Quicksand-Bold", size: 32)
+        labelCulture.font = font
+        
+        cultureGallery.frame = CGRect(x: 250, y: 80, width: 940, height: 230)
+        cultureGallery.text = "Galeria de Culturas\n Veja o que você aprendeu!"
+        cultureGallery.textColor = .purple
+        cultureGallery.numberOfLines = 0
+        cultureGallery.textAlignment = .center
+        
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.8
+        paragraphStyle.alignment = .center
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "Quicksand-Bold", size: 100)!]
+        let myString = NSMutableAttributedString(string: "Galeria de Culturas\n", attributes: myAttribute)
+        
+        
+        let smallFont = UIFont(name: "Quicksand-Bold", size: 80)
+        let bigAtt = [NSAttributedString.Key.font : smallFont, NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        
+        myString.append(NSAttributedString(string: "China", attributes: bigAtt as [NSAttributedString.Key : Any]))
+        myString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myString.length))
+        
+        
+        cultureGallery.attributedText = myString
+        
+        self.view = view
+        view.addSubview(cultureGallery)
+        view.addSubview(firework)
+        view.addSubview(china)
+        view.addSubview(labelCulture)
+        
+    }
+}
+
 // Present the view controller in the Live View window
 
 

@@ -10,8 +10,5 @@ public class Card {
         self.imageCard = imageCard
         
     }
-    
-    var cards = [Card(imageCard: "China"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio")]
-    
 
 }
