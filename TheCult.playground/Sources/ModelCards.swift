@@ -3,16 +3,15 @@ import UIKit
 
 public class Card {
     
-    public let imageCard: UIImage
-    public let labelCard: UILabel
+    public let imageCard: String
     
-    public init (imageCard: UIImage, labelCard: UILabel) {
+    public init (imageCard: String) {
         
         self.imageCard = imageCard
-        self.labelCard = labelCard
         
     }
     
+    var cards = [Card(imageCard: "China"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio"), Card(imageCard: "Vazio")]
     
 
 }
