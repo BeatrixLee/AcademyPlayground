@@ -25,28 +25,31 @@ class FirstViewController : UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         
-    
+        
         let imgBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: 1440, height: 900))
         imgBackground.image = UIImage(imageLiteralResourceName: "Background")
         
-        let theCult = UIImageView(frame: CGRect(x: 560, y: 150, width: 323.35, height: 260.19))
+        let theCult = UIImageView(frame: CGRect(x: 520, y: 150, width: 363, height: 300))
         theCult.image = UIImage(imageLiteralResourceName: "theCult")
         
         
         let imgView = UIImageView(frame: CGRect(x: 118, y: 126, width: 1204, height: 660))
         imgView.image = UIImage(imageLiteralResourceName: "Rectangle 10")
         
-        var monocle = UIImageView(frame: CGRect(x: 790, y: 200, width: 52.54, height: 43.94))
+        var monocle = UIImageView(frame: CGRect(x: 780, y: 0, width: 52.54, height: 43.94))
         monocle.image = UIImage(imageLiteralResourceName: "monocle")
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+
+           
+           UIView.animate(withDuration: 1.8, delay: 0.3, options: .beginFromCurrentState, animations: { () -> Void in
+            monocle.center.y = 235
+
+           })
+               
+           }
         
-        
-        UIView.animate(withDuration: 2.0, delay: 0.3, options: .beginFromCurrentState, animations: { () -> Void in
-                  monocle.center = view.center
-                  
-              })
-        
-        
-        buttonPlay.frame = CGRect(x: 312, y: 380, width: 780, height: 140)
+        buttonPlay.frame = CGRect(x: 312, y: 420, width: 780, height: 140)
         
         let imagePlay = UIImage(named: "Play")!
         buttonPlay.setImage(imagePlay, for: .normal)
@@ -55,7 +58,7 @@ class FirstViewController : UIViewController {
         buttonPlay.addTarget(self, action: #selector(FirstViewController.touchedButtonPlay), for: .touchUpInside)
         
         
-        buttonGallery.frame = CGRect(x: 334, y: 510, width: 759, height: 140)
+        buttonGallery.frame = CGRect(x: 334, y: 550, width: 759, height: 140)
         let imageGallery = UIImage(named: "gallery")!
         buttonGallery.setImage(imageGallery, for: .normal)
         
@@ -73,13 +76,13 @@ class FirstViewController : UIViewController {
         self.view = view
         
     }
-      
-        
+  
+    
     @IBAction func touchedButtonPlay() {
         print("tocou botão jogar")
         let vc = SecondViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
-
+        
     }
     
     @IBAction func touchedButtonGallery() {
@@ -89,7 +92,8 @@ class FirstViewController : UIViewController {
     }
     
 }
-    
+
+
 
 class SecondViewController: UIViewController {
     
@@ -722,6 +726,7 @@ class TenthViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     let cultureGallery = UILabel()
     var myCollectionView: UICollectionView?
+    let backButton = UIButton()
     
     override func loadView() {
         let view = UIView()
@@ -751,6 +756,13 @@ class TenthViewController: UIViewController, UICollectionViewDataSource, UIColle
         myString.append(NSAttributedString(string: "Veja o que você aprendeu!", attributes: bigAtt as [NSAttributedString.Key : Any]))
         myString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myString.length))
         
+        backButton.frame = CGRect(x: 70, y: 79, width: 92, height: 92)
+               
+               let imageBackButton = UIImage(named: "back")!
+               backButton.setImage(imageBackButton, for: .normal)
+        
+        backButton.addTarget(self, action: #selector(EleventhViewController.touchedButtonBack), for: .touchUpInside)
+        
         
         cultureGallery.attributedText = myString
         
@@ -771,6 +783,14 @@ class TenthViewController: UIViewController, UICollectionViewDataSource, UIColle
         view.addSubview(firework)
         view.addSubview(cultureGallery)
         view.addSubview(myCollectionView!)
+        view.addSubview(backButton)
+        
+    }
+    
+    @IBAction func touchedButtonBack() {
+    print("tocou botão voltar")
+    let vc = FirstViewController(screenType: .mac, isPortrait: true)
+    navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -796,8 +816,8 @@ class TenthViewController: UIViewController, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
-        let vc = EleventhViewController(screenType: .mac, isPortrait: true)
-        navigationController?.pushViewController(vc, animated: true)
+            let vc = EleventhViewController(screenType: .mac, isPortrait: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
@@ -806,7 +826,8 @@ class EleventhViewController: UIViewController {
     
     let cultureGallery = UILabel()
     let labelCulture = UILabel()
-
+    let backButton = UIButton()
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
@@ -830,6 +851,13 @@ class EleventhViewController: UIViewController {
         cultureGallery.numberOfLines = 0
         cultureGallery.textAlignment = .center
         
+        backButton.frame = CGRect(x: 70, y: 79, width: 92, height: 92)
+               
+               let imageBackButton = UIImage(named: "back")!
+               backButton.setImage(imageBackButton, for: .normal)
+        
+        backButton.addTarget(self, action: #selector(EleventhViewController.touchedButtonBack), for: .touchUpInside)
+        
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 0.8
@@ -852,7 +880,13 @@ class EleventhViewController: UIViewController {
         view.addSubview(firework)
         view.addSubview(china)
         view.addSubview(labelCulture)
+        view.addSubview(backButton)
         
+    }
+    @IBAction func touchedButtonBack() {
+            print("tocou botão voltar")
+            let vc = TenthViewController(screenType: .mac, isPortrait: true)
+            navigationController?.pushViewController(vc, animated: true)
     }
 }
 
