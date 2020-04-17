@@ -79,14 +79,12 @@ class FirstViewController : UIViewController {
   
     
     @IBAction func touchedButtonPlay() {
-        print("tocou botão jogar")
         let vc = SecondViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
     @IBAction func touchedButtonGallery() {
-        print("tocou botão galeria")
         let vc = TenthViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -151,21 +149,18 @@ class SecondViewController: UIViewController {
     }
     
     @IBAction func touchedButtonEasy() {
-        print("tocou botão facil")
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 120
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func touchedButtonMedium() {
-        print("tocou botão medio")
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 60
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func touchedButtonHard() {
-        print("tocou botão dificil")
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 30
         navigationController?.pushViewController(vc, animated: true)
@@ -465,14 +460,12 @@ class FifthViewController: UIViewController {
     }
     
     @IBAction func rightbutton() {
-        print("tocou botão china")
         let vc = SeventhViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
     @IBAction func wrongbutton() {
-        print("tocou botão errado")
         let vc = NinthViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
         
@@ -516,7 +509,6 @@ class SixthViewController: UIViewController {
         super.viewWillAppear(animated)
         let imagem = UIImage(named: button!)
         self.image?.image = imagem
-        print(button)
         
     }
     
@@ -632,14 +624,12 @@ class EigthViewController: UIViewController {
     }
     
     @IBAction func touchedButtonMedium() {
-        print("tocou botão medio")
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 60
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func touchedButtonAnotherCulture() {
-        print("tocou botão medio")
         let vc = FirstViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -693,7 +683,7 @@ class NinthViewController: UIViewController {
         let imageAnotherCulture2 = UIImage(named: "anotherCulture2")!
         buttonAnotherCulture2.setImage(imageAnotherCulture2, for: .normal)
         
-        buttonAnotherCulture2.addTarget(self, action: #selector(NinthViewController.touchedButtonAnotherCulture), for: .touchUpInside)
+        buttonAnotherCulture2.addTarget(self, action: #selector(NinthViewController.touchedButtonTry), for: .touchUpInside)
         
         buttonTry.frame = CGRect(x: 195, y: 482, width: 346, height: 145)
         
@@ -715,9 +705,13 @@ class NinthViewController: UIViewController {
     }
     
     @IBAction func touchedButtonAnotherCulture() {
-        print("tocou botão medio")
         let vc = ThirdViewController(screenType: .mac, isPortrait: true)
         vc.difficulty = 120
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func touchedButtonTry() {
+        let vc = FirstViewController(screenType: .mac, isPortrait: true)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -788,7 +782,6 @@ class TenthViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @IBAction func touchedButtonBack() {
-    print("tocou botão voltar")
     let vc = FirstViewController(screenType: .mac, isPortrait: true)
     navigationController?.pushViewController(vc, animated: true)
         
@@ -884,7 +877,6 @@ class EleventhViewController: UIViewController {
         
     }
     @IBAction func touchedButtonBack() {
-            print("tocou botão voltar")
             let vc = TenthViewController(screenType: .mac, isPortrait: true)
             navigationController?.pushViewController(vc, animated: true)
     }
